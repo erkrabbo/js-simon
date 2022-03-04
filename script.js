@@ -33,6 +33,7 @@ function play(){
     EXTRACTED_NUMBERS = [];
     USER_NUMBERS = [];
     
+    numbersContainer.style.flexDirection = 'row';
 
     for (let i = 0; i <= BIGGEST_NUMBER; i++){
         NUMBERS_ARRAY.push(i);
@@ -58,6 +59,8 @@ function numbersRequest(){
     numbersContainer.innerHTML = '';
     numbersContainer.style.flexDirection = 'column';
 
+    console.log([...EXTRACTED_NUMBERS])
+
     setTimeout(chiamoPrompt, 0);
 }
 
@@ -73,17 +76,27 @@ function chiamoPrompt(){
         }
         USER_NUMBERS.push(input);
     }
-    correct ? numbersContainer.innerHTML = 'GRANDE BRO' : lose();
+    correct ? win() : lose();
+}
+
+function win(){
+    EXTRACTED_NUMBERS = EXTRACTED_NUMBERS.join(' ');
+    USER_NUMBERS = USER_NUMBERS.join(' ');
+
+    numbersContainer.innerHTML = `<h2>I numeri erano ${EXTRACTED_NUMBERS}</h2><h2>Tu hai inserito ${USER_NUMBERS}</h2><h2>GRANDE!</h2>`
 }
 
 function lose(){
     let counter = 0;
+
     for(let i = 0; i < EXTRACTED_NUMBERS.length; i++){
         if (EXTRACTED_NUMBERS[i] == USER_NUMBERS[i]){
             counter++;
         }
     }
+
     EXTRACTED_NUMBERS = EXTRACTED_NUMBERS.join(' ');
     USER_NUMBERS = USER_NUMBERS.join(' ');
+
     numbersContainer.innerHTML = `<h2>I numeri erano ${EXTRACTED_NUMBERS}</h2><h2>Tu hai inserito ${USER_NUMBERS}</h2><h2>Ne hai indovinati ${counter}</h2>`
 }
