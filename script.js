@@ -18,7 +18,7 @@ numbersContainer.innerHTML = '<h1>HAI 30 SECONDI PER MEMORIZZARE I 5 NUMERI CHE 
 
 
 restart.innerHTML = 'START';
-restart.classList.add('align-self-end')
+restart.classList.add('align-self-end');
 restart.addEventListener('click', play);
 
 
@@ -47,17 +47,21 @@ function play(){
     
         numbersContainer.appendChild(numberDiv);
     }
-
-    setTimeout(numbersRequest, 1000);
+    setTimeout(numbersRequest, 5*1000);
 }
-
 
 function numbersRequest(){
     numbersContainer.innerHTML = '';
 
+    setTimeout(chiamoPrompt, 0);
+}
+
+function chiamoPrompt(){
     let correct = true;
 
     for (let i = 0; i < NUMBERS_NUM; i++){
+        console.log('ciao');
+        numbersContainer.innerHTML = '';
         let input = parseInt(prompt(`Inserisci numero ${i + 1}:`));
         if(input != EXTRACTED_NUMBERS[i]){
             correct = false;
@@ -66,4 +70,3 @@ function numbersRequest(){
     }
     correct ? numbersContainer.innerHTML = 'GRANDE BRO' : numbersContainer.innerHTML = 'MI DISP';
 }
-
