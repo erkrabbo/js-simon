@@ -2,6 +2,7 @@ const NUMBERS_NUM = 5;
 const BIGGEST_NUMBER = 1000;
 const SECONDS = 5;
 const NUMBERS_ARRAY = [];
+
 let EXTRACTED_NUMBERS = [];
 let USER_NUMBERS = [];
 
@@ -59,12 +60,10 @@ function numbersRequest(){
     numbersContainer.innerHTML = '';
     numbersContainer.style.flexDirection = 'column';
 
-    console.log([...EXTRACTED_NUMBERS])
-
-    setTimeout(chiamoPrompt, 0);
+    setTimeout(promptCall, 0);
 }
 
-function chiamoPrompt(){
+function promptCall(){
     let correct = true;
 
     for (let i = 0; i < NUMBERS_NUM; i++){
@@ -83,7 +82,7 @@ function win(){
     EXTRACTED_NUMBERS = EXTRACTED_NUMBERS.join(' ');
     USER_NUMBERS = USER_NUMBERS.join(' ');
 
-    numbersContainer.innerHTML = `<h2>I numeri erano ${EXTRACTED_NUMBERS}</h2><h2>Tu hai inserito ${USER_NUMBERS}</h2><h2>GRANDE!</h2>`
+    numbersContainer.innerHTML = `<h2>I numeri erano ${EXTRACTED_NUMBERS}</h2><h2>Tu hai inserito ${USER_NUMBERS}</h2><h2>GRANDE!</h2><span>Premi su START per rigiocare</span>`
 }
 
 function lose(){
@@ -98,5 +97,5 @@ function lose(){
     EXTRACTED_NUMBERS = EXTRACTED_NUMBERS.join(' ');
     USER_NUMBERS = USER_NUMBERS.join(' ');
 
-    numbersContainer.innerHTML = `<h2>I numeri erano ${EXTRACTED_NUMBERS}</h2><h2>Tu hai inserito ${USER_NUMBERS}</h2><h2>Ne hai indovinati ${counter}</h2>`
+    numbersContainer.innerHTML = `<h2>I numeri erano ${EXTRACTED_NUMBERS}</h2><h2>Tu hai inserito ${USER_NUMBERS}</h2><h2>Ne hai indovinati ${counter}</h2><span>Premi su START per rigiocare</span>`
 }
