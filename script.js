@@ -1,8 +1,9 @@
 const NUMBERS_NUM = 5;
 const BIGGEST_NUMBER = 1000;
+const SECONDS = 5;
 const NUMBERS_ARRAY = [];
-const EXTRACTED_NUMBERS = [];
-const USER_NUMBERS = [];
+let EXTRACTED_NUMBERS = [];
+let USER_NUMBERS = [];
 
 const container = document.createElement('div');
 const numbersContainer = document.createElement('div');
@@ -29,6 +30,9 @@ document.body.appendChild(container);
 
 function play(){
     numbersContainer.innerHTML = '';
+    EXTRACTED_NUMBERS = [];
+    USER_NUMBERS = [];
+    
 
     for (let i = 0; i <= BIGGEST_NUMBER; i++){
         NUMBERS_ARRAY.push(i);
@@ -47,11 +51,12 @@ function play(){
     
         numbersContainer.appendChild(numberDiv);
     }
-    setTimeout(numbersRequest, 5*1000);
+    setTimeout(numbersRequest, SECONDS*1000);
 }
 
 function numbersRequest(){
     numbersContainer.innerHTML = '';
+    numbersContainer.style.flexDirection = 'column';
 
     setTimeout(chiamoPrompt, 0);
 }
@@ -68,5 +73,17 @@ function chiamoPrompt(){
         }
         USER_NUMBERS.push(input);
     }
-    correct ? numbersContainer.innerHTML = 'GRANDE BRO' : numbersContainer.innerHTML = 'MI DISP';
+    correct ? numbersContainer.innerHTML = 'GRANDE BRO' : lose();
+}
+
+function lose(){
+    let counter = 0;
+    for(let i = 0; i < EXTRACTED_NUMBERS.length; i++){
+        if (EXTRACTED_NUMBERS[i] == USER_NUMBERS[i]){
+            counter++;
+        }
+    }
+    EXTRACTED_NUMBERS = EXTRACTED_NUMBERS.join(' ');
+    USER_NUMBERS = USER_NUMBERS.join(' ');
+    numbersContainer.innerHTML = `<h2>I numeri erano ${EXTRACTED_NUMBERS}</h2><h2>Tu hai inserito ${USER_NUMBERS}</h2><h2>Ne hai indovinati ${counter}</h2>`
 }
